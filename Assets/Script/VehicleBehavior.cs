@@ -7,6 +7,7 @@ public class VehicleBehavior : MonoBehaviour
 
     public float speed;
     private Transform transform;
+
     void Start()
     {
          transform = GetComponent<Transform>();
@@ -14,6 +15,12 @@ public class VehicleBehavior : MonoBehaviour
 
      void Update ()
     {
+        if (Input.GetKey("space")){
+            Vector3 orientation = transform.rotation.eulerAngles;
+            orientation.x = -90f;
+            transform.eulerAngles = orientation;
+        }
+
         float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
 
@@ -21,7 +28,7 @@ public class VehicleBehavior : MonoBehaviour
         Vector3 rotation = new Vector3 (0.0f,0.0f,moveHorizontal);
 
         transform.Translate(movement * speed * Time.deltaTime);
-        transform.Rotate(rotation);
+        transform.Rotate(rotation * speed * 30 * Time.deltaTime);
         
     }
 }
