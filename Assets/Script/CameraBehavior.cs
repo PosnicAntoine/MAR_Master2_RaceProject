@@ -11,12 +11,8 @@ public class CameraBehavior : MonoBehaviour
 
     void LateUpdate()
     {
-
         Vector3 desiredPosition = player.transform.TransformPoint(0,-distance,height);
-
         transform.position = Vector3.Lerp (transform.position, desiredPosition, Time.deltaTime * damping);
-
         transform.LookAt(player.transform);
-
     }
 }
