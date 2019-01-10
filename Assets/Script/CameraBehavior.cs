@@ -5,20 +5,18 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
     public GameObject player;
-    private Vector3 offset;
-    void Start()
-    {
-        offset = transform.position - player.transform.position;
-    }
+    public float damping = 10;
+    public float height = 0.2f;
+    public float distance = 0.5f;
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
 
-        /**
-        ROTATION
-         */
+        Vector3 desiredPosition = player.transform.TransformPoint(0,-distance,height);
+
+        transform.position = Vector3.Lerp (transform.position, desiredPosition, Time.deltaTime * damping);
+
+        transform.LookAt(player.transform);
 
     }
 }
