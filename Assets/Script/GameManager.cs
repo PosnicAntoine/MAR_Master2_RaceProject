@@ -6,9 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;             //This script, like MouseLocation, has a public static reference to itself to that other scripts
                                                     //can access it from anywhere without needing to find a reference to it
-    bool gamemodePlay;
-    bool gamemodeReplay;
-    bool gamemodeGhostRace;
+    [HideInInspector] public bool gamemodePlay;
+    [HideInInspector] public bool gamemodeReplay;
+    [HideInInspector] public bool gamemodeGhostRace;
+    GameObject car;
+    GameObject ghost;
     [HideInInspector]
     public int score = 0;                                  //The player's current score
 
@@ -29,13 +31,7 @@ public class GameManager : MonoBehaviour
         gamemodePlay = true;
         gamemodeGhostRace = false;
         gamemodeReplay = false;
-    }
-
-    public void RePlay()
-    {
-        gamemodeReplay = true;
-        gamemodePlay = false;
-        gamemodeGhostRace = false;
+        Debug.Log("gamemodeplay : "+ gamemodePlay.ToString());
     }
 
     public void GhostRace()
@@ -43,6 +39,13 @@ public class GameManager : MonoBehaviour
         gamemodeGhostRace = true;
         gamemodePlay = false;
         gamemodeReplay = false;
+    }
+
+    public void RePlay()
+    {
+        gamemodeReplay = true;
+        gamemodePlay = false;
+        gamemodeGhostRace = false;
     }
 
 }
