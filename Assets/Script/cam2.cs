@@ -1,0 +1,19 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class cam2 : MonoBehaviour
+{
+    private void OnTriggerEnter(Collider other)
+    {
+        if (GameManager.Instance.gamemodeReplay)
+        {
+            GameManager.Instance.Enable2();
+        }
+    }
+
+    private void Update()
+    {
+        transform.LookAt(GameManager.Instance.car.transform);
+    }
+}

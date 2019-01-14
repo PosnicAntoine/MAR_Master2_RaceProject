@@ -9,19 +9,24 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool gamemodePlay;
     [HideInInspector] public bool gamemodeReplay;
     [HideInInspector] public bool gamemodeGhostRace;
-    GameObject car;
+    public GameObject car;
     GameObject ghost;
+    public Camera run;
+    public Camera replay1;
+    public Camera replay2;
+    public Camera replay3;
+    public Camera replay4;
+    public Camera replay5;
+    public Camera replay6;
     [HideInInspector]
     public int score = 0;                                  //The player's current score
 
     void Awake()
     {
-        //This is a common approach to handling a class with a reference to itself.
-        //If instance variable doesn't exist, assign this object to it
+       
         if (Instance == null)
             Instance = this;
-        //Otherwise, if the instance variable does exist, but it isn't this object, destroy this object.
-        //This is useful so that we cannot have more than one GameManager object in a scene at a time.
+       
         else if (Instance != this)
             Destroy(this);
     }
@@ -32,13 +37,27 @@ public class GameManager : MonoBehaviour
         gamemodeGhostRace = false;
         gamemodeReplay = false;
         Debug.Log("gamemodeplay : "+ gamemodePlay.ToString());
-    }
+        run.enabled = true;
+        replay1.enabled = false;
+        replay2.enabled = false;
+        replay3.enabled = false;
+        replay4.enabled = false;
+        replay5.enabled = false;
+        replay6.enabled = false;
+     }
 
     public void GhostRace()
     {
         gamemodeGhostRace = true;
         gamemodePlay = false;
         gamemodeReplay = false;
+        run.enabled = true;
+        replay1.enabled = false;
+        replay2.enabled = false;
+        replay3.enabled = false;
+        replay4.enabled = false;
+        replay5.enabled = false;
+        replay6.enabled = false;
     }
 
     public void RePlay()
@@ -46,6 +65,93 @@ public class GameManager : MonoBehaviour
         gamemodeReplay = true;
         gamemodePlay = false;
         gamemodeGhostRace = false;
+        run.enabled = false;
+        replay1.enabled = true;
+        replay2.enabled = false;
+        replay3.enabled = false;
+        replay4.enabled = false;
+        replay5.enabled = false;
+        replay6.enabled = false;
     }
 
+    public void Enable1()
+    {
+        if (gamemodeReplay)
+        {
+            run.enabled = false;
+            replay1.enabled = true;
+            replay2.enabled = false;
+            replay3.enabled = false;
+            replay4.enabled = false;
+            replay5.enabled = false;
+            replay6.enabled = false;
+        }
+    }
+
+    public void Enable2()
+    {
+        if (gamemodeReplay)
+        {
+            run.enabled = false;
+            replay1.enabled = false;
+            replay2.enabled = true;
+            replay3.enabled = false;
+            replay4.enabled = false;
+            replay5.enabled = false;
+            replay6.enabled = false;
+        }
+    }
+
+    public void Enable3()
+    {
+        if (gamemodeReplay)
+        {
+            run.enabled = false;
+            replay1.enabled = false;
+            replay2.enabled = false;
+            replay3.enabled = true;
+            replay4.enabled = false;
+            replay5.enabled = false;
+            replay6.enabled = false;
+        }
+    }
+
+    public void Enable4()
+    { if (gamemodeReplay)
+        {
+            run.enabled = false;
+            replay1.enabled = false;
+            replay2.enabled = false;
+            replay3.enabled = false;
+            replay4.enabled = true;
+            replay5.enabled = false;
+            replay6.enabled = false;
+        }
+    }
+
+    public void Enable5()
+    { if (gamemodeReplay)
+        {
+            run.enabled = false;
+            replay1.enabled = false;
+            replay2.enabled = true;
+            replay3.enabled = false;
+            replay4.enabled = false;
+            replay5.enabled = true;
+            replay6.enabled = false;
+        }
+    }
+    public void Enable6()
+    {
+        if (gamemodeReplay)
+        {
+            run.enabled = false;
+            replay1.enabled = false;
+            replay2.enabled = true;
+            replay3.enabled = false;
+            replay4.enabled = false;
+            replay5.enabled = false;
+            replay6.enabled = true;
+        }
+    }
 }
