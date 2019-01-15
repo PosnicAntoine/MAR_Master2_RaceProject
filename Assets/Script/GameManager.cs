@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool gamemodeReplay;
     [HideInInspector] public bool gamemodeGhostRace;
     public GameObject car;
-    GameObject ghost;
+    public GameObject ghost;
     public Camera run;
     public Camera replay1;
     public Camera replay2;
