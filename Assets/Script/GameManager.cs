@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int score = 0;                                  //The player's current score
 
+    public DataController dataController;
     void Awake()
     {
        
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
        
         else if (Instance != this)
             Destroy(this);
+        
     }
 
     public void PlayRace()
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
         replay4.enabled = false;
         replay5.enabled = false;
         replay6.enabled = false;
+
+        Recorder.Instance.StartRecording();
      }
 
     public void GhostRace()
@@ -58,6 +62,8 @@ public class GameManager : MonoBehaviour
         replay4.enabled = false;
         replay5.enabled = false;
         replay6.enabled = false;
+
+        Recorder.Instance.StartRecording();
     }
 
     public void RePlay()
@@ -154,4 +160,11 @@ public class GameManager : MonoBehaviour
             replay6.enabled = true;
         }
     }
+
+    public void SaveData(Race race){
+        dataController.SaveLastRace(race);
+        dataController.UpdateDataFile();
+    }
+
+
 }

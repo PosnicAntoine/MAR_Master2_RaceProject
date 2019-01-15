@@ -33,4 +33,11 @@ public class VehicleBehavior : MonoBehaviour
 
        // }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name.Contains("Check")){
+            Recorder.Instance.Check(other);
+        }
+    }
 }

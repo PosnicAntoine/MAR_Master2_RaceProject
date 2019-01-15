@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,15 +14,19 @@ with:
 - y: numeric
 - z: numeric
  */
+
+[Serializable]
 public class Race 
 {
-    public long Id { get; set; }
-    public string Name {get; set; }
+    public string name;
 
-    public List<Vector4> Trajectory { get; set; } // Vector4 :(time,coord x, coord y, coord z)
+    [SerializeField]
+    public List<Vector4> Trajectory; // Vector4 :(time,coord x, coord y, coord z)
 
     public Race(){
         Trajectory = new List<Vector4>();
     }
+
+    
 
 }

@@ -7,9 +7,9 @@ public class ManageDatabase
 {
 
     static string uri = "URI=file:" + Application.dataPath + "/Resources/Database/mar_database.db";
-    IDbConnection dbconn;  
+    static IDbConnection dbconn;  
 
-    void Connection(){
+    static void Connection(){
         if (dbconn == null) {
             dbconn = (IDbConnection) new SqliteConnection(uri);
             dbconn.Open();
@@ -17,7 +17,7 @@ public class ManageDatabase
     }
 
 
-    void Close(){
+    static void Close(){
         if (dbconn != null){
             dbconn.Close();
             dbconn = null;
@@ -55,18 +55,21 @@ public class ManageDatabase
         Close();
     }
 
-    public void addRace(Race race){
+    public static void addRace(Race race){
         Connection();
 
-        IDbCommand dbcmd = dbconn.CreateCommand();
+        /*IDbCommand dbcmd = dbconn.CreateCommand();
         string insert ="";
         foreach(Vector4 position in race.Trajectory){
             insert += "INSERT INTO RACE VALUES (\'" + race.Id + "\',\'" + race.Name + "\',\'" + 
                 position.x + "\',\'" + position.y + "\',\'" + position.z + "\',\'" + position.w +"\');";
         }
         dbcmd.CommandText = insert;
-        dbcmd.ExecuteNonQuery();
+        dbcmd.ExecuteNonQuery();*/
         Close();
+        foreach(Vector4 position in race.Trajectory){
+            Debug.Log("Time: " + position.x + " x: " + position.y + " y: " + position.z + " z: " + position.w);
+        }
     }
 
 
