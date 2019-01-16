@@ -5,7 +5,7 @@ using UnityEngine;
 public class VehicleBehavior : MonoBehaviour
 {
 
-    public float speed = 4;
+    public float speed = 3;
     private Transform transform;
 
     void Start()
