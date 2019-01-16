@@ -15,7 +15,7 @@ public class VehicleBehavior : MonoBehaviour
 
     void Update()
     {
-       // if (GameManager.Instance != null && (GameManager.Instance.gamemodePlay || GameManager.Instance.gamemodeGhostRace)){
+       if (GameManager.Instance != null && (GameManager.Instance.gamemodePlay || GameManager.Instance.gamemodeGhostRace)){
             if (Input.GetKey("space")) {
                 Vector3 orientation = transform.rotation.eulerAngles;
                 orientation.x = -90f;
@@ -31,7 +31,7 @@ public class VehicleBehavior : MonoBehaviour
             transform.Translate(movement * speed * Time.deltaTime);
             transform.Rotate(rotation * speed * 30 * Time.deltaTime);
 
-       // }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

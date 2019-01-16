@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,10 +19,12 @@ public class GameManager : MonoBehaviour
     public Camera replay4;
     public Camera replay5;
     public Camera replay6;
+    public Text scoreui;
     [HideInInspector]
-    public int score = 0;                                  //The player's current score
+    public int score = 0;
 
     public DataController dataController;
+
     void Awake()
     {
        
@@ -38,6 +41,8 @@ public class GameManager : MonoBehaviour
         gamemodePlay = true;
         gamemodeGhostRace = false;
         gamemodeReplay = false;
+        score = 0;
+        UpdateScore();
         Debug.Log("gamemodeplay : "+ gamemodePlay.ToString());
         run.enabled = true;
         replay1.enabled = false;
@@ -55,6 +60,8 @@ public class GameManager : MonoBehaviour
         gamemodeGhostRace = true;
         gamemodePlay = false;
         gamemodeReplay = false;
+        score = 0;
+        UpdateScore();
         run.enabled = true;
         replay1.enabled = false;
         replay2.enabled = false;
@@ -164,6 +171,11 @@ public class GameManager : MonoBehaviour
     public void SaveData(Race race){
         dataController.SaveLastRace(race);
         dataController.UpdateDataFile();
+    }
+
+    public void UpdateScore()
+    {
+        scoreui.text = score.ToString();
     }
 
 

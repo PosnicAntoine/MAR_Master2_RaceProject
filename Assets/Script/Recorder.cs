@@ -60,7 +60,14 @@ public class Recorder : MonoBehaviour
     public void Check(Collider collider){
         if (collider == checkpoints[next]){
             if(next == checkpoints.Length-1){
-                EndRecording();
+                GameManager.Instance.score ++;
+                GameManager.Instance.UpdateScore();
+                if (GameManager.Instance.score == 5)
+                {
+                    EndRecording();
+                    return;
+                }
+                next = 0;
                 return;
             }
             next++;
