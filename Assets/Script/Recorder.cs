@@ -9,6 +9,7 @@ public class Recorder : MonoBehaviour
     private Race race;
     public GameObject player;
     public Collider[] checkpoints;
+    public int tour_number=3;
     private int next;
     private bool isRecording;
     private float startTimeRecording;
@@ -62,7 +63,7 @@ public class Recorder : MonoBehaviour
             if(next == checkpoints.Length-1){
                 GameManager.Instance.score ++;
                 GameManager.Instance.UpdateScore();
-                if (GameManager.Instance.score == 5)
+                if (GameManager.Instance.score == tour_number)
                 {
                     EndRecording();
                     return;

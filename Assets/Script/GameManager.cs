@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         gamemodeReplay = false;
         score = 0;
         UpdateScore();
+        ghost.SetActive(true);
         run.enabled = true;
         replay1.enabled = false;
         replay2.enabled = false;
@@ -175,7 +176,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateScore()
     {
-        scoreui.text = score.ToString();
+        scoreui.text = score.ToString() + " / " + Recorder.Instance.tour_number.ToString() + " Tours";
     }
 
 
