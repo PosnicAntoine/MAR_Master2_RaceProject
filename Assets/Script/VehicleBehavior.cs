@@ -6,13 +6,16 @@ public class VehicleBehavior : MonoBehaviour
 {
 
     public float speed = 3;
+    float fwdSpeed = 30f;
     private Transform transform;
+    private Rigidbody rb;
     public AudioSource audioDataAvance;
     public AudioSource audioDataTourne;
 
     void Start()
     {
             transform = GetComponent<Transform>();
+            rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -47,7 +50,8 @@ public class VehicleBehavior : MonoBehaviour
             Vector3 movement = new Vector3(0.0f, moveVertical, 0.0f);
             Vector3 rotation = new Vector3(0.0f, 0.0f, moveHorizontal);
 
-            transform.Translate(movement * speed * Time.deltaTime);
+            rb.AddForce(transform.up * fwdSpeed * moveVertical,ForceMode.Acceleration);
+            //transform.Translate(movement * speed * Time.deltaTime);
             transform.Rotate(rotation * speed * 30 * Time.deltaTime);
 
         }
