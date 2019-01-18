@@ -8,9 +8,10 @@ public class GhostBehavior : MonoBehaviour
     int cursor;
 
     bool isMoving;
-    public Vector3 rotation;
 
     float launchTime;
+
+    public float speedRotation = 5f;
     void Awake(){
         isMoving = false;
     }
@@ -40,10 +41,11 @@ public class GhostBehavior : MonoBehaviour
                 Vector3 interpolePos = 
                     Vector3.Lerp(posI,posF,ratio);
 
-                rotation = (interpolePos - transform.position) / Time.deltaTime;
+                Vector3 vectorDir = interpolePos - transform.position;
+                var rotation = Quaternion.LookRotation(vectorDir);
+                rotation *= Quaternion.Euler(-90, 180, 0);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * speedRotation); 
                 transform.position = interpolePos; 
-
-                transform.Rotate(rotation);
                 
                 return;
             }
@@ -56,9 +58,7 @@ public class GhostBehavior : MonoBehaviour
         this.race = race;
     
         if(race.Trajectory.Count > 0){
-            Debug.Log("SetUp");
             transform.position = race.GetPos(0);
-            Debug.Log(race.Trajectory.Count);
         }
         cursor = 1;
     }
