@@ -33,7 +33,12 @@ public class GameManager : MonoBehaviour
        
         else if (Instance != this)
             Destroy(this);
-        
+
+        AudioSource[] sounds = car.GetComponents<AudioSource>() ;
+        foreach (AudioSource i in sounds)
+        {
+            i.enabled=false;
+        }
     }
 
     public void PlayRace()
@@ -43,6 +48,11 @@ public class GameManager : MonoBehaviour
         gamemodeReplay = false;
         score = 0;
         UpdateScore();
+        AudioSource[] sounds = car.GetComponents<AudioSource>();
+        foreach (AudioSource i in sounds)
+        {
+            i.enabled = true;
+        }
         Debug.Log("gamemodeplay : "+ gamemodePlay.ToString());
         run.enabled = true;
         replay1.enabled = false;

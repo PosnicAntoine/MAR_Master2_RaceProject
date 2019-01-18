@@ -7,6 +7,8 @@ public class VehicleBehavior : MonoBehaviour
 
     public float speed = 3;
     private Transform transform;
+    public AudioSource audioDataAvance;
+    public AudioSource audioDataTourne;
 
     void Start()
     {
@@ -20,6 +22,23 @@ public class VehicleBehavior : MonoBehaviour
                 Vector3 orientation = transform.rotation.eulerAngles;
                 orientation.x = -90f;
                 transform.eulerAngles = orientation;
+            } 
+
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+            {
+                audioDataAvance.UnPause();
+            } else
+            {
+                audioDataAvance.Pause();
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+            {
+                audioDataTourne.UnPause();
+            }
+            else
+            {
+                audioDataTourne.Pause();
             }
 
             float moveHorizontal = Input.GetAxis("Horizontal");
