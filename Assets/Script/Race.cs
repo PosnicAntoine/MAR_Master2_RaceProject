@@ -27,6 +27,19 @@ public class Race
         Trajectory = new List<Vector4>();
     }
 
+    public float GetTime(int index){
+        return Trajectory[index].x;
+    }
+
+    public Vector3 GetPos(int index){
+        Vector3 pos = new Vector3(){
+            x = Trajectory[index].y,
+            y = Trajectory[index].z,
+            z = Trajectory[index].w
+        };
+        return pos;
+    }
+
     
 
 }

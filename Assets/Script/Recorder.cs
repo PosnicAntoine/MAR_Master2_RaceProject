@@ -30,7 +30,7 @@ public class Recorder : MonoBehaviour
         if (player != null){
             if (isRecording){
                 Vector4 position = new Vector4();
-                position.x = startTimeRecording - Time.time;
+                position.x = Time.time - startTimeRecording;
                 position.y = player.transform.position.x;
                 position.z = player.transform.position.y;
                 position.w = player.transform.position.z;
@@ -42,7 +42,7 @@ public class Recorder : MonoBehaviour
     void Init(){
         isRecording = false;
         race = new Race();
-        race.name = "TestRecord";
+        race.name = "TestRecord2";
         next = 0;
     }
 

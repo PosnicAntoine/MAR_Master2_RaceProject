@@ -18,8 +18,11 @@ public class DataController : MonoBehaviour
     }
 
     public float GetBestScore(){
-        float ti = DataGame.bestRace.Trajectory[0].x;
-        float tf = DataGame.bestRace.Trajectory[DataGame.bestRace.Trajectory.Count-1].x;
+        if(DataGame.bestRace.Trajectory.Count == 0){
+            return 0;
+        }
+        float ti = DataGame.bestRace.GetTime(0);
+        float tf = DataGame.bestRace.GetTime(DataGame.bestRace.Trajectory.Count-1);
 
         return tf -ti;
     }
@@ -51,9 +54,9 @@ public class DataController : MonoBehaviour
     }
 
     public void SubmitNewBestRace(Race race){
-        float ti = race.Trajectory[0].x;
-        float tf = race.Trajectory[race.Trajectory.Count-1].x;
-        if (GetBestScore() > (tf-ti)){
+        float ti = race.GetTime(0);
+        float tf = race.GetTime(race.Trajectory.Count-1);
+        if (GetBestScore() > (tf-ti) || GetBestScore() == 0){
             SaveNewBestRace(race);
         }
     }

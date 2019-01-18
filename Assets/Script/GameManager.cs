@@ -71,7 +71,9 @@ public class GameManager : MonoBehaviour
         replay5.enabled = false;
         replay6.enabled = false;
 
+        ghost.GetComponent<GhostBehavior>().SetUp(dataController.GetBestRace());
         Recorder.Instance.StartRecording();
+        ghost.GetComponent<GhostBehavior>().Launch();
     }
 
     public void RePlay()
@@ -171,6 +173,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveData(Race race){
         dataController.SaveLastRace(race);
+        dataController.SubmitNewBestRace(race);
         dataController.UpdateDataFile();
     }
 
