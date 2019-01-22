@@ -22523,6 +22523,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4351332904249637189, guid: ad8fb05f3f157e642a5b49da289ac419,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 9ab7eb363ccb6a94ba1032551b779b69,
+        type: 2}
     - target: {fileID: 4351332904726028278, guid: ad8fb05f3f157e642a5b49da289ac419,
         type: 3}
       propertyPath: m_LocalPosition.y

@@ -6,7 +6,7 @@ public class VehicleBehavior : MonoBehaviour
 {
 
     public float speed = 3;
-    float fwdSpeed = 30f;
+    float fwdSpeed = 15f;
     private Transform transform;
     private Rigidbody rb;
     public AudioSource audioDataAvance;
