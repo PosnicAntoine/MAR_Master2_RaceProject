@@ -62,10 +62,12 @@ public class Recorder : MonoBehaviour
         if (collider == checkpoints[next]){
             if(next == checkpoints.Length-1){
                 GameManager.Instance.score ++;
+                GameManager.Instance.SaveTourTime();
                 GameManager.Instance.UpdateScore();
                 if (GameManager.Instance.score == tour_number)
                 {
                     EndRecording();
+                    GameManager.Instance.EndRace();
                     return;
                 }
                 next = 0;

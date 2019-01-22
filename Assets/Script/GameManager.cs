@@ -22,9 +22,13 @@ public class GameManager : MonoBehaviour
     public Text scoreui;
     public Text speedtext;
     public Text timetext;
+    public Text textresults;
+    public GameObject panel;
     [HideInInspector]
     public int score = 0;
     private float time;
+    List<float> timetours;
+    
 
     public DataController dataController;
 
@@ -58,6 +62,7 @@ public class GameManager : MonoBehaviour
         gamemodeReplay = false;
         score = 0;
         time = 0;
+        timetours = new List<float>();
         UpdateScore();
         AudioSource[] sounds = car.GetComponents<AudioSource>();
         foreach (AudioSource i in sounds)
@@ -222,5 +227,26 @@ public class GameManager : MonoBehaviour
         speedtext.text= x + " km/h";
     }
 
+    public void SaveTourTime() 
+    {
+        timetours.Add(time);
+    }
 
+    public void EndRace()
+    {
+        car.GetComponent<VehicleBehavior>().enabled = false;
+        panel.SetActive(true);
+        string x = "";
+        float r = 0;
+        for (int i=0; i<(timetours.Count); i++)
+        {
+            x += "Tour " + i.ToString() + " in " + (timetours[i] - r).ToString("0.00") + " seconds \n";
+            r = timetours[i];
+
+        }
+        textresults.text = x;
+        // disable script vehicule behavior
+        // display panel avec resultats
+        //play feu d'artifice
+    }
 }
