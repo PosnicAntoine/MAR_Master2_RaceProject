@@ -110,6 +110,9 @@ public class GameManager : MonoBehaviour
         replay4.enabled = false;
         replay5.enabled = false;
         replay6.enabled = false;
+
+        car.GetComponent<VehicleBehavior>().SetUpReplay(dataController.GetLastRace());
+        car.GetComponent<VehicleBehavior>().Launch();
     }
 
     public void Enable1()
@@ -194,9 +197,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void SaveData(Race race){
-        dataController.SaveLastRace(race);
-        dataController.SubmitNewBestRace(race);
-        dataController.UpdateDataFile();
+        if (!gamemodeReplay){
+            dataController.SaveLastRace(race);
+            dataController.SubmitNewBestRace(race);
+            dataController.UpdateDataFile();
+        }
+        
     }
 
     public void UpdateScore()
