@@ -20,8 +20,11 @@ public class GameManager : MonoBehaviour
     public Camera replay5;
     public Camera replay6;
     public Text scoreui;
+    public Text speedtext;
+    public Text timetext;
     [HideInInspector]
     public int score = 0;
+    private float time;
 
     public DataController dataController;
 
@@ -41,12 +44,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        time += Time.deltaTime;
+        UpdateTime();
+        UpdateSpeed();
+    }
+
     public void PlayRace()
     {
         gamemodePlay = true;
         gamemodeGhostRace = false;
         gamemodeReplay = false;
         score = 0;
+        time = 0;
         UpdateScore();
         AudioSource[] sounds = car.GetComponents<AudioSource>();
         foreach (AudioSource i in sounds)
@@ -71,6 +82,7 @@ public class GameManager : MonoBehaviour
         gamemodePlay = false;
         gamemodeReplay = false;
         score = 0;
+        time = 0;
         UpdateScore();
         ghost.SetActive(true);
         run.enabled = true;
@@ -190,6 +202,18 @@ public class GameManager : MonoBehaviour
     public void UpdateScore()
     {
         scoreui.text = score.ToString() + " / " + Recorder.Instance.tour_number.ToString() + " Tours";
+    }
+
+    public void UpdateTime()
+    {
+        string x = time.ToString("0.0");
+        timetext.text = x.ToString()+" seconds";
+    }
+
+    public void UpdateSpeed()
+    {
+        string x = ((car.GetComponent<Rigidbody>().velocity.magnitude)*3.6).ToString("0.0");
+        speedtext.text= x + " km/h";
     }
 
 
