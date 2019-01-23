@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29686192, g: 0.24606448, b: 0.23193651, a: 1}
+  m_IndirectSpecularColor: {r: 0.29697776, g: 0.24607444, b: 0.23221657, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16026,6 +16026,8 @@ MonoBehaviour:
   scoreui: {fileID: 1945803316}
   speedtext: {fileID: 976599887}
   timetext: {fileID: 1945330954}
+  textresults: {fileID: 0}
+  panel: {fileID: 0}
   score: 0
   dataController: {fileID: 888695204}
 --- !u!4 &1076953046
@@ -21560,7 +21562,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 981393acd4eb8fb4a831077ba04626e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  rotationsSpeed: 5
+  fwdSpeed: 10
+  velocity: 10
+  maxVelocity: 3.5
   audioDataAvance: {fileID: 1824887622}
   audioDataTourne: {fileID: 1824887619}
 --- !u!65 &1824887612
@@ -21955,7 +21960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1824887610}
-  damping: 8
+  damping: 10
   height: 0.3
   distance: 0.5
 --- !u!4 &1899664873 stripped
@@ -22333,7 +22338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950683740}
   m_LocalRotation: {x: -0.013250329, y: -0.9574272, z: 0.049941212, w: 0.28401324}
-  m_LocalPosition: {x: -2.34, y: 1.7, z: -1.43}
+  m_LocalPosition: {x: -2.35, y: 3.84, z: -1.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

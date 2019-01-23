@@ -5,10 +5,10 @@ using UnityEngine;
 public class VehicleBehavior : MonoBehaviour
 {
 
-    public float speed = 3;
-    public float velocity;
-    private float maxVelocity = 4;
-    float fwdSpeed = 15f;
+    public float rotationsSpeed=0;
+    public float fwdSpeed=0;
+    public float velocity=0;
+    public float maxVelocity=0;
     private Transform transform;
     private Rigidbody rb;
     public AudioSource audioDataAvance;
@@ -16,7 +16,6 @@ public class VehicleBehavior : MonoBehaviour
 
     /// Params for replay mode:
     private Race replayedRace;
-    float speedRotation = 5f;
     int cursor;
     bool isMoving;
     float launchTime;
@@ -73,7 +72,7 @@ public class VehicleBehavior : MonoBehaviour
                     rb.AddForce(transform.up * fwdSpeed * moveVertical,ForceMode.Acceleration);
                 }
                 //transform.Translate(movement * speed * Time.deltaTime);
-                transform.Rotate(rotation * speed * 30 * Time.deltaTime);
+                transform.Rotate(rotation * rotationsSpeed * 30 * Time.deltaTime);
                 //rb.AddTorque(rotation);
 
             }
@@ -137,7 +136,7 @@ public class VehicleBehavior : MonoBehaviour
                 Vector3 vectorDir = interpolePos - transform.position;
                 var rotation = Quaternion.LookRotation(vectorDir);
                 rotation *= Quaternion.Euler(-90, 180, 0);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * speedRotation); 
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationsSpeed); 
                 transform.position = interpolePos; 
                 
                 return;

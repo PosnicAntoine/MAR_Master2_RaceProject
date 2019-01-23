@@ -13,7 +13,7 @@ public class CameraBehavior : MonoBehaviour
     {
         Vector3 desiredPosition = player.transform.TransformPoint(0,-distance,height);
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * damping);
-        transform.LookAt(player.transform);
+        transform.LookAt(player.transform.position  + player.transform.up);//set the camera to look in front of the player
         
     }
 }
