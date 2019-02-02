@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int score = 0;
     private float time;
-    List<float> timetours;
-    
+    List<float> timetours;    
 
     public DataController dataController;
 
@@ -46,6 +45,8 @@ public class GameManager : MonoBehaviour
         {
             i.enabled=false;
         }
+        HidePlayUI();
+        
     }
 
     private void Update()
@@ -56,7 +57,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayRace()
-    {
+    {   
+        car.GetComponent<VehicleBehavior>().enabled = true;
+        ShowPlayUI();
         gamemodePlay = true;
         gamemodeGhostRace = false;
         gamemodeReplay = false;
@@ -83,6 +86,8 @@ public class GameManager : MonoBehaviour
 
     public void GhostRace()
     {
+        car.GetComponent<VehicleBehavior>().enabled = true;
+        ShowPlayUI();
         gamemodeGhostRace = true;
         gamemodePlay = false;
         gamemodeReplay = false;
@@ -210,6 +215,19 @@ public class GameManager : MonoBehaviour
         
     }
 
+    void ShowPlayUI(){
+        scoreui.enabled = true;
+        timetext.enabled = true;
+        speedtext.enabled = true;
+    }
+
+    void HidePlayUI(){
+        scoreui.enabled = false;
+        timetext.enabled = false;
+        speedtext.enabled = false;
+    }
+
+
     public void UpdateScore()
     {
         scoreui.text = score.ToString() + " / " + Recorder.Instance.tour_number.ToString() + " Tours";
@@ -244,7 +262,12 @@ public class GameManager : MonoBehaviour
             r = timetours[i];
 
         }
+        HidePlayUI();
         textresults.text = x;
+
+        gamemodePlay = false;
+        gamemodeGhostRace = false;
+        gamemodeReplay = false;
         // disable script vehicule behavior
         // display panel avec resultats
         //play feu d'artifice
