@@ -37,6 +37,7 @@ public class GameLauncher : MonoBehaviour
         {
             GameManager.Instance.GhostRace();
             panel.SetActive(false);
+            playerutils.SetActive(true);
         }
     }
 

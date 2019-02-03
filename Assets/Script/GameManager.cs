@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
         {
             i.enabled=false;
         }
+
+        AudioSource music = this.GetComponent<AudioSource>();
+        music.volume = 0.5f;
+
         HidePlayUI();
         
     }
@@ -59,6 +63,8 @@ public class GameManager : MonoBehaviour
     public void PlayRace()
     {   
         car.GetComponent<VehicleBehavior>().enabled = true;
+        AudioSource music = this.GetComponent<AudioSource>();
+        music.volume = 0.2f;
         ShowPlayUI();
         gamemodePlay = true;
         gamemodeGhostRace = false;
@@ -93,6 +99,13 @@ public class GameManager : MonoBehaviour
         gamemodeReplay = false;
         score = 0;
         time = 0;
+        AudioSource music = this.GetComponent<AudioSource>();
+        music.volume = 0.2f;
+        AudioSource[] sounds = car.GetComponents<AudioSource>();
+        foreach (AudioSource i in sounds)
+        {
+            i.enabled = true;
+        }
         UpdateScore();
         ghost.SetActive(true);
         run.enabled = true;
@@ -258,7 +271,7 @@ public class GameManager : MonoBehaviour
         float r = 0;
         for (int i=0; i<(timetours.Count); i++)
         {
-            x += "Tour " + i.ToString() + " in " + (timetours[i] - r).ToString("0.00") + " seconds \n";
+            x += "Tour " + (i+1).ToString() + " in " + (timetours[i] - r).ToString("0.00") + " seconds \n";
             r = timetours[i];
 
         }
