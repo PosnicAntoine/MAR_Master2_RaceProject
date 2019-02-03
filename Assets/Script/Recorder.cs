@@ -8,9 +8,15 @@ public class Recorder : MonoBehaviour
 
     private Race race;
     public GameObject player;
-    public Collider[] checkpoints;
+    //public Collider[] checkpoints;
+    public Collider checkpoint1;
+    public Collider checkpoint2;
+    public Collider checkpoint2bis;
+    public Collider checkpoint3;
+    public Collider checkpoint4;
+    public Collider checkpointArr;
     public int tour_number=3;
-    private int next;
+    private Collider next;
     private bool isRecording;
     private float startTimeRecording;
 
@@ -42,7 +48,7 @@ public class Recorder : MonoBehaviour
         isRecording = false;
         race = new Race();
         race.name = "TestRecord2";
-        next = 0;
+        next = checkpoint1;
     }
 
     public void StartRecording(){
@@ -58,22 +64,57 @@ public class Recorder : MonoBehaviour
     }
 
     public void Check(Collider collider){
-        if (collider == checkpoints[next]){
-            if(next == checkpoints.Length-1){
-                GameManager.Instance.score ++;
-                GameManager.Instance.SaveTourTime();
-                GameManager.Instance.UpdateScore();
-                if (GameManager.Instance.score == tour_number)
-                {
-                    EndRecording();
-                    GameManager.Instance.EndRace();
-                    return;
-                }
-                next = 0;
+
+        if (collider == checkpoint1 && next == checkpoint1)
+        {
+            next = checkpoint2;
+        }
+
+        if ((collider == checkpoint2 || collider == checkpoint2bis) && next == checkpoint2)
+        {
+            next = checkpoint3;
+        }
+
+        if (collider == checkpoint3 && next == checkpoint3)
+        {
+            next = checkpoint4;
+        }
+
+        if (collider == checkpoint4 && next == checkpoint4)
+        {
+            next = checkpointArr;
+        }
+
+        if (collider == checkpointArr && next == checkpointArr)
+        {
+            next = checkpoint1;
+            GameManager.Instance.score++;
+            GameManager.Instance.UpdateScore();
+            if (GameManager.Instance.score == tour_number)
+            {
+                EndRecording();
+                GameManager.Instance.EndRace();
                 return;
             }
-            next++;
         }
+
+
+        /* if (collider == checkpoints[next]){
+             if(next == checkpoints.Length-1){
+                 GameManager.Instance.score ++;
+
+                 GameManager.Instance.UpdateScore();
+                 if (GameManager.Instance.score == tour_number)
+                 {
+                     EndRecording();
+                     GameManager.Instance.EndRace();
+                     return;
+                 }
+                 next = 0;
+                 return;
+             }
+             next++;
+         }*/
     }
 
 }

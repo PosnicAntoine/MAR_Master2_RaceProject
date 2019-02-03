@@ -268,6 +268,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore()
     {
         scoreui.text = score.ToString() + " / " + Recorder.Instance.tour_number.ToString() + " Tours";
+        timetours.Add(time);
     }
 
     public void UpdateTime()
@@ -282,14 +283,6 @@ public class GameManager : MonoBehaviour
         speedtext.text= x + " km/h";
     }
 
-    public void SaveTourTime() 
-    {   
-        if (!gamemodeReplay){
-            timetours.Add(time);
-        }
-        
-    }
-
     public void EndRace()
     {
         car.GetComponent<VehicleBehavior>().enabled = false;
@@ -297,22 +290,21 @@ public class GameManager : MonoBehaviour
         if(!gamemodeReplay){
             string x = "";
             float r = 0;
-            for (int i=0; i<(timetours.Count); i++)
+            if (timetours.Count > 0)
             {
-                x += "Tour " + (i+1).ToString() + " in " + (timetours[i] - r).ToString("0.00") + " seconds \n";
-                r = timetours[i];
-            }
-            textresults.text = x;
+                for (int i = 1; i < (timetours.Count); i++)
+                {
+                    x += "Tour " + i.ToString() + " in " +(timetours[i]-r).ToString("0.00") + " seconds \n";
+                    r = timetours[i];
+                }
+                textresults.text = x;
+            }     
         }
         
         HidePlayUI();
-
         gamemodePlay = false;
         gamemodeGhostRace = false;
         gamemodeReplay = false;
-        // disable script vehicule behavior
-        // display panel avec resultats
-        //play feu d'artifice
     }
 
     public void Pause(){
