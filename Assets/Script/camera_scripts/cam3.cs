@@ -12,9 +12,4 @@ public class cam3 : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        transform.LookAt(GameManager.Instance.car.transform);
-    }
-
 }

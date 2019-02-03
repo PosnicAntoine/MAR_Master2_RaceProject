@@ -11,8 +11,4 @@ public class cam6 : MonoBehaviour
             GameManager.Instance.Enable6();
         }
     }
-    private void Update()
-    {
-        transform.LookAt(GameManager.Instance.car.transform);
-    }
 }

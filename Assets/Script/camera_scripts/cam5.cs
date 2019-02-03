@@ -11,9 +11,4 @@ public class cam5 : MonoBehaviour
             GameManager.Instance.Enable5();
         }
     }
-
-    private void Update()
-    {
-        transform.LookAt(GameManager.Instance.car.transform);
-    }
 }

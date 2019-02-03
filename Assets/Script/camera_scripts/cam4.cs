@@ -12,8 +12,4 @@ public class cam4 : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        transform.LookAt(GameManager.Instance.car.transform);
-    }
 }
