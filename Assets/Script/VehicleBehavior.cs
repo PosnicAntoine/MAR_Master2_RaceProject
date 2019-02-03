@@ -33,6 +33,9 @@ public class VehicleBehavior : MonoBehaviour
     {
         if (GameManager.Instance != null){
             if (GameManager.Instance.gamemodeReplay){
+                if (Input.GetKey("escape")){
+                    GameManager.Instance.Pause();
+                }
                 if (replayedRace != null){
                     MoveReplay();
                 }
@@ -40,6 +43,9 @@ public class VehicleBehavior : MonoBehaviour
             }
             if ((GameManager.Instance.gamemodePlay || GameManager.Instance.gamemodeGhostRace))
             {
+                if (Input.GetKey("escape")){
+                    GameManager.Instance.Pause();
+                }
                 if (Input.GetKey("space")) {
                     Vector3 orientation = transform.rotation.eulerAngles;
                     orientation.x = -90f;
@@ -67,15 +73,13 @@ public class VehicleBehavior : MonoBehaviour
                 float moveHorizontal = Input.GetAxis("Horizontal");
                 float moveVertical = Input.GetAxis("Vertical");
 
-                Vector3 movement = new Vector3(0.0f, moveVertical, 0.0f);
                 Vector3 rotation = new Vector3(0.0f, 0.0f, moveHorizontal);
 
                 if (rb.velocity.magnitude < maxVelocity){
                     rb.AddForce(transform.up * fwdSpeed * moveVertical,ForceMode.Acceleration);
                 }
-                //transform.Translate(movement * speed * Time.deltaTime);
+                
                 transform.Rotate(rotation * rotationsSpeed * 30 * Time.deltaTime);
-                //rb.AddTorque(rotation);
 
             }
 
@@ -123,6 +127,7 @@ public class VehicleBehavior : MonoBehaviour
                     } 
                     else {
                         End(); 
+                        GameManager.Instance.EndRace();
                         return;
                     }
                     
@@ -144,6 +149,7 @@ public class VehicleBehavior : MonoBehaviour
                 return;
             }
             End();       
+            GameManager.Instance.EndRace();
         }
     }
 }

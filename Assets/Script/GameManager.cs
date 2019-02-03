@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour
     private float time;
     List<float> timetours;    
 
+    public Transform initialTransform;
+    Vector3 initialRotation = new Vector3(-90,180,0);
+    bool onPause;
+
+    public GameObject pausePanel;
+
     public DataController dataController;
 
     void Awake()
@@ -63,6 +69,12 @@ public class GameManager : MonoBehaviour
     public void PlayRace()
     {   
         car.GetComponent<VehicleBehavior>().enabled = true;
+        car.transform.position = initialTransform.position;
+        car.transform.eulerAngles = initialRotation;
+
+        onPause = false;
+        Time.timeScale = 1;
+
         AudioSource music = this.GetComponent<AudioSource>();
         music.volume = 0.2f;
         ShowPlayUI();
@@ -87,12 +99,19 @@ public class GameManager : MonoBehaviour
         replay5.enabled = false;
         replay6.enabled = false;
 
+        Recorder.Instance.Init();
         Recorder.Instance.StartRecording();
      }
 
     public void GhostRace()
     {
         car.GetComponent<VehicleBehavior>().enabled = true;
+        car.transform.position = initialTransform.position;
+        car.transform.eulerAngles = initialRotation;
+
+        onPause = false;
+        Time.timeScale = 1;
+
         ShowPlayUI();
         gamemodeGhostRace = true;
         gamemodePlay = false;
@@ -117,6 +136,7 @@ public class GameManager : MonoBehaviour
         replay6.enabled = false;
 
         ghost.GetComponent<GhostBehavior>().SetUp(dataController.GetBestRace());
+        Recorder.Instance.Init();
         Recorder.Instance.StartRecording();
         ghost.GetComponent<GhostBehavior>().Launch();
     }
@@ -126,6 +146,10 @@ public class GameManager : MonoBehaviour
         gamemodeReplay = true;
         gamemodePlay = false;
         gamemodeGhostRace = false;
+
+        onPause = false;
+        Time.timeScale = 1;
+
         run.enabled = false;
         replay1.enabled = true;
         replay2.enabled = false;
@@ -259,24 +283,29 @@ public class GameManager : MonoBehaviour
     }
 
     public void SaveTourTime() 
-    {
-        timetours.Add(time);
+    {   
+        if (!gamemodeReplay){
+            timetours.Add(time);
+        }
+        
     }
 
     public void EndRace()
     {
         car.GetComponent<VehicleBehavior>().enabled = false;
         panel.SetActive(true);
-        string x = "";
-        float r = 0;
-        for (int i=0; i<(timetours.Count); i++)
-        {
-            x += "Tour " + (i+1).ToString() + " in " + (timetours[i] - r).ToString("0.00") + " seconds \n";
-            r = timetours[i];
-
+        if(!gamemodeReplay){
+            string x = "";
+            float r = 0;
+            for (int i=0; i<(timetours.Count); i++)
+            {
+                x += "Tour " + (i+1).ToString() + " in " + (timetours[i] - r).ToString("0.00") + " seconds \n";
+                r = timetours[i];
+            }
+            textresults.text = x;
         }
+        
         HidePlayUI();
-        textresults.text = x;
 
         gamemodePlay = false;
         gamemodeGhostRace = false;
@@ -285,4 +314,12 @@ public class GameManager : MonoBehaviour
         // display panel avec resultats
         //play feu d'artifice
     }
+
+    public void Pause(){
+        onPause = !onPause;
+        Time.timeScale = (onPause) ? 0 : 1;
+        pausePanel.SetActive(onPause);
+    }
+
+
 }

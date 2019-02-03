@@ -23,7 +23,6 @@ public class Recorder : MonoBehaviour
         else if (Instance != this)
             Destroy(this);
 
-        Init();
     }
 
     void Update(){
@@ -39,7 +38,7 @@ public class Recorder : MonoBehaviour
         }
     }
 
-    void Init(){
+    public void Init(){
         isRecording = false;
         race = new Race();
         race.name = "TestRecord2";
