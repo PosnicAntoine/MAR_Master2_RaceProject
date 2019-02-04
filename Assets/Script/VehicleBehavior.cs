@@ -10,7 +10,6 @@ public class VehicleBehavior : MonoBehaviour
     public float velocity=0;
     public float maxVelocity=0;
     public Vector3 vecCenterOfMass = new Vector3(0f,0f,0f);
-    private Transform transform;
     private Rigidbody rb;
     public AudioSource audioDataAvance;
     public AudioSource audioDataTourne;
@@ -23,7 +22,7 @@ public class VehicleBehavior : MonoBehaviour
 
     void Start()
     {
-            transform = GetComponent<Transform>();
+            //transform = GetComponent<Transform>();
             rb = GetComponent<Rigidbody>();
             rb.centerOfMass = vecCenterOfMass;
             isMoving = false;
