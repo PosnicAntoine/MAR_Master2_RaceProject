@@ -105,6 +105,12 @@ public class GameManager : MonoBehaviour
 
     public void GhostRace()
     {
+        time = 0;
+        gamemodeGhostRace = true;
+        gamemodePlay = false;
+        gamemodeReplay = false;
+
+        Debug.Log("gamemodeGhost: " + gamemodeGhostRace.ToString());
         car.GetComponent<VehicleBehavior>().enabled = true;
         car.transform.position = initialTransform.position;
         car.transform.eulerAngles = initialRotation;
@@ -113,11 +119,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         ShowPlayUI();
-        gamemodeGhostRace = true;
-        gamemodePlay = false;
-        gamemodeReplay = false;
+   
         score = 0;
-        time = 0;
+        
         AudioSource music = this.GetComponent<AudioSource>();
         music.volume = 0.2f;
         AudioSource[] sounds = car.GetComponents<AudioSource>();
@@ -125,7 +129,10 @@ public class GameManager : MonoBehaviour
         {
             i.enabled = true;
         }
+
+        timetours = new List<float>();
         UpdateScore();
+
         ghost.SetActive(true);
         run.enabled = true;
         replay1.enabled = false;
