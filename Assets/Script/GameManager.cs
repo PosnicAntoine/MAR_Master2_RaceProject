@@ -153,10 +153,10 @@ public class GameManager : MonoBehaviour
         gamemodeReplay = true;
         gamemodePlay = false;
         gamemodeGhostRace = false;
-
         onPause = false;
+        textresults.text = "";
         Time.timeScale = 1;
-
+        timetours = new List<float>();
         run.enabled = false;
         replay1.enabled = true;
         replay2.enabled = false;
@@ -165,6 +165,7 @@ public class GameManager : MonoBehaviour
         replay5.enabled = false;
         replay6.enabled = false;
 
+        car.GetComponent<VehicleBehavior>().enabled = true;
         car.GetComponent<VehicleBehavior>().SetUpReplay(dataController.GetLastRace());
         car.GetComponent<VehicleBehavior>().Launch();
     }
@@ -294,7 +295,15 @@ public class GameManager : MonoBehaviour
     {
         car.GetComponent<VehicleBehavior>().enabled = false;
         panel.SetActive(true);
-        if(!gamemodeReplay){
+
+        Debug.Log("gamemodeplay : " + gamemodePlay.ToString() + " gamemodeGhost : " + gamemodeGhostRace.ToString() + " gamemodeReplay : " + gamemodeReplay.ToString());
+
+
+        if (gamemodeGhostRace) {
+            ghost.SetActive(false);
+        }
+
+        if (gamemodePlay || gamemodeGhostRace){
             string x = "";
             float r = 0;
             if (timetours.Count > 0)
