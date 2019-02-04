@@ -1,6 +1,6 @@
 # RaceProject: Une course minimaliste, pour les ennuis occasionnels
 
-![Banner of our game](https://imgur.com/a/jVbYeIb)
+![Banner of our game](https://i.imgur.com/7rs7qT3.png)
 
 ## Introduction
 
@@ -15,7 +15,7 @@ Ce projet a été réalisé dans le cadre d'études, et à pour but de de decuvr
 
 ### Prérequis si vous voulez toucher au code:
 
-* [Unity 2018 3.0+](https://developer.android.com/studio/), pour l'environnement de dev.
+* [Unity 2018 3.0+](https://unity3d.com/fr), pour l'environnement de dev.
 
 
 #
